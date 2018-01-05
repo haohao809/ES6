@@ -7,7 +7,7 @@ import $ from 'jquery';
 
 const copyProperties=function(target,source){
 	for(let key of Reflect.ownKeys(source)){
-		if(key!==='constructor'&&key!=='prototype'&&key!=='name'){
+		if(key!=='constructor'&&key!=='prototype'&&key!=='name'){
 			let desc = Object.getOwnPropertyDescriptor(source,key);
 			Object.defineProperty(target,key,desc);
 		}
@@ -23,7 +23,7 @@ const mix = function(...mixins){
 }
 class Lottery extends mix(Base,Calculate,Interface,Timer){
 	constructor(name='syy',cname='11选5',issue='**',state='**'){
-		supper();
+		super();
 		this.name = name;
 		this.cname = cname;
 		this.issue = issue;
@@ -45,7 +45,7 @@ class Lottery extends mix(Base,Calculate,Interface,Timer){
 	    this.updateState();
 	    this.initEvent();
 	}
-	/****/
+	/****状态更新**/
 	updateState(){
 		let self = this;
 		this.getState().then(function(res){
@@ -68,4 +68,14 @@ class Lottery extends mix(Base,Calculate,Interface,Timer){
 			})
 		})
 	}
+	//初始化事件
+	initEvent(){
+		let self = this;
+		$('#plays').on('click','li',self.changePlayNav.bind(self));
+		$('.boll-list').on('click','.btn-boll',self.toggleCodeActive.bind(self));
+		$('#confirm_sel_code').on('click',self.addCode.bind(self));
+		$('.dxjo').on('click','li',self.assistHandle.bind(self));
+		$('.qkmethod').on('click','.btn-middle',self.getRandomCode.bind(self));
+	}
 }
+export default Lottery;

@@ -1,5 +1,5 @@
 import $ from 'jquery'
-class interface{
+class Interface{
 	//获取遗漏数据接口
 	getOmit(issue){
 		let self = this;
@@ -10,7 +10,7 @@ class interface{
 				async:true,
 				data: {
 					issue:issue
-				}
+				},
 				dataType: 'json',
 				success: function(res){
 					self.setOmit(res.data);
@@ -32,7 +32,7 @@ class interface{
 				async:true,
 				data: {
 					issue:issue
-				}
+				},
 				dataType: 'json',
 				success: function(res){
 					self.setOpenCode(res.data);
@@ -54,7 +54,7 @@ class interface{
 				async:true,
 				data: {
 					issue:issue
-				}
+				},
 				dataType: 'json',
 				success: function(res){
 					resolve.call(self,res)

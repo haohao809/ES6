@@ -69,7 +69,7 @@ import $ from 'jquery'
 			let self = this;
 			let $cur = $(e.currentTarget);
 			$cur.toggleClass('btn-boll-active');
-			slef.getCount();
+			self.getCount();
 		}
 		//切换玩法
 		changePlayNav(e){
@@ -118,6 +118,7 @@ import $ from 'jquery'
 					}
 				})
 			}
+			 self.getCount();
 		}
 		//获取当前彩票名称
 		getName(){
@@ -126,8 +127,8 @@ import $ from 'jquery'
 		//添加号码
 		addCode(){
 			let self = this;
-			let $active = $('.btn-boll-active').text().match(/\d{2}/);
-			let actice = $active?$active.length:0;
+			let $active = $('.btn-boll-active').text().match(/\d{2}/g);
+			let active = $active?$active.length:0;
 			let count = self.computeCount(active,self.cur_play);
 			if(count){
 				self.addCodeItem($active.join(' '),self.cur_play,self.play_list.get(self.cur_play).name,count);
@@ -141,7 +142,7 @@ import $ from 'jquery'
 				<li codes="${type}|${code}" bonus="${count*2}" count="${count}">
 					 <div class="code">
 						 <b>${typeName}${count>1? '复式':'单式'}</b>
-						 <b class="em">${code}}</b>
+						 <b class="em">${code}</b>
 						 [${count}注,<em class="code-list-money">${count*2}</em>元]
 					 </div>
 				 </li>
@@ -194,19 +195,19 @@ import $ from 'jquery'
 			while(num--){
 				index = Number.parseInt(Math.random()*number.length);
 				arr.push(number[index]);
-				number.aplice(index,1);
+				number.splice(index,1);
 			}
 			return arr.join(' ');
 		}
 		//添加随机号码
-		getRandomcode(e){
+		getRandomCode(e){
 			e.preventDefault();
 			let self =this;
 			let target = e.currentTarget;
 			let num =$(target).attr('count');
 			let play = this.cur_play.match(/\d+/g)[0];
-			if(num === 0){
-				$('self.cart_el').html('')
+			if(num === '0'){
+				$(self.cart_el).html('')
 			}else{
 				for(let i =0 ; i<num; i++){
 					self.addCodeItem(self.getRandom(play),self.cur_play,self.play_list.get(self.cur_play).name,1);

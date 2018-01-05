@@ -1,11 +1,11 @@
-class Timer ={
+class Timer {
 	countdown(end,update,handle){
 		const now = new Date().getTime();
 		const self = this;
 		if(end-now<0){
 			handle.call(self);
 		}else{
-			let countdownTime = end - time;
+			let countdownTime = end - now;
 			const day = 1000*60*60*24;
 			const hour = 100*60*60;
 			const min = 1000*60;
@@ -13,7 +13,7 @@ class Timer ={
 			let d = Math.floor(countdownTime/day);
 			let h = Math.floor((countdownTime-d*day)/hour);
 			let m = Math.floor((countdownTime-d*day-h*hour)/min);
-			let s = Math.floor((countdownTime-d*day-h*hour-m*min))/sec);
+			let s = Math.floor((countdownTime-d*day-h*hour-m*min)/sec);
 			let res = [];
 			if(d>0){
 				res.push(`<em>${d}</em>天`);
@@ -37,3 +37,4 @@ class Timer ={
 	
 	
 }
+export default Timer

@@ -24,8 +24,10 @@ var makeIssue=function(){
 		cur_issue_date.setMinutes(0);
 		cur_issue_date.setSeconds(0);
 		var minus_time=date.getTime()-cur_issue_date.getTime();
+		//最后的期数
 		var h=Math.ceil(minus_time/1000/60/10);
 		var end_date=new Date(cur_issue_date.getTime()+1000*60*10*h);
+		debugger;
 		end_time=end_date.getTime();
 		cur_issue=[end_date.getFullYear(),('0'+(end_date.getMonth()+1)).slice(-2),('0'+end_date.getDate()).slice(-2),('0'+h).slice(-2)].join('')
 	}else{
@@ -49,7 +51,8 @@ var makeIssue=function(){
 	return {
 		issue:cur_issue,
 		state:state,
-		end_time:end_time
+		end_time:end_time,
+		h:h
 	}
 }
 
